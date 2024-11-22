@@ -152,9 +152,7 @@ func (u *Updater) applyUpdate(binaryPath string) error {
 	}
 	defer binary.Close()
 
-	err = selfupdate.Apply(binary, selfupdate.Options{
-		TargetPath: filepath.Join(filepath.Dir(binaryPath), u.BinaryName),
-	})
+	err = selfupdate.Apply(binary, selfupdate.Options{})
 	if err != nil {
 		log.Printf("Update failed: %v. Attempting rollback...", err)
 		if rollbackErr := selfupdate.RollbackError(err); rollbackErr != nil {
